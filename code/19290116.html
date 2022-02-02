@@ -1,0 +1,132 @@
+<!-- 
+19290116
+MOHAMMAD SHABIB
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>graphics</title>
+  </head>
+
+  <body>
+    <canvas id="glcanvas" style="float: left" width="860" height="860"></canvas>
+    <br />
+    <label>19290116</label>
+    <br />
+    <label>MOHAMMAD SHABIB</label>
+    <br />
+    <br />
+    <button id="StartRotationButton">Start/Stop Rotation</button>
+    <button id="DirectionButton">Change Rotation Direction</button>
+
+    <div>
+      Rotation Speed 0
+      <input
+        id="RotationSpeedSlide"
+        type="range"
+        min="0"
+        max="500"
+        step="1"
+        value="50"
+        style="width: 500px"
+      />
+      500
+    </div>
+    <br />
+    <div>
+      Scale 0.1
+      <input
+        id="ScallingSlide"
+        type="range"
+        min="0.1"
+        max="2"
+        step="0.02"
+        value="1"
+        style="width: 500px"
+      />
+      2
+    </div>
+    <br />
+    <label id="label">Background Color </label
+    ><input type="color" id="BackgroundColor" value="#000000" />
+    <br />
+    <label id="label">Font Color‏ ‏ ‏ ‏ ‏ ‏ ‏ ‏ ‏ ‏ ‏ ‏ ‏ </label
+    ><input type="color" id="fontColor" value="#2bff00" />
+
+    <div>
+      Transparency 0
+      <input
+        id="transparencySlide"
+        type="range"
+        min="0"
+        max="1"
+        step="0.001"
+        value="1"
+        style="width: 500px"
+      />
+      1
+    </div>
+    <br />
+    <br />
+    <!--Empty Charecters-->
+    <label>‏ ‏ ‏ ‏ ‏ ‏ ‏ ‏ ‏ ‏ ‏ ‏ ‏ ‏ ‏ ‏ ‏ ‏ ‏ ‏ </label>
+    <button id="Up">Move Up</button>
+    <br />
+    <button id="left">Move Left</button>
+    <button id="Down">Move Down</button>
+    <button id="Right">Move Right</button>
+    <br />
+    <pre>
+  Keyboard Shortcuts: 
+  R                 :  Red Color
+  G                 :  Green Color
+  Space             :  Start/Stop Rotating
+  Enter             :  Change Rotation Direction
+  Right arrow → | D :  Translate  Right
+  Left arrow ←  | A :  Translate  Left
+  Up arrow ↑    | W :  Translate  Up
+  Down arrow ↓  | S :  Translate  RiDownght
+  + | -             :  Scaling
+</pre
+    >
+  </body>
+  <script id="vertex-shader" type="x-shader/xvertex">
+
+    attribute vec4 vPosition;
+    uniform float theta;
+    uniform float scaler;
+    uniform vec4 translate;
+    void main()
+    {
+      //Rotation
+      gl_Position.x = cos(theta) * vPosition.x -
+      sin(theta) * vPosition.y;
+      gl_Position.y = sin(theta) * vPosition.x +
+      cos(theta) * vPosition.y;
+      gl_Position.z = 0.0;
+      gl_Position.w = 1.0;
+
+      //Scalling
+      gl_Position.x *= scaler;
+      gl_Position.y *= scaler;
+
+      //Translating
+      gl_Position +=  translate;
+
+
+    }
+  </script>
+  <script id="fragment-shader" type="x-shader/xfragment">
+    precision mediump float;
+    uniform vec4 u_color;
+    void main() {
+
+    gl_FragColor = u_color;
+    }
+  </script>
+  <script src="../common/initShaders.js"></script>
+  <script src="../common/MV.js"></script>
+  <script src="../common/webgl-utils.js"></script>
+
+  <script src="19290116.js"></script>
+</html>
